@@ -1,0 +1,12 @@
+/home/honeykill/STM32_Project/f407_ele/App/Emm_V5_App.c:12:13:Emm_V5_App_USB_Reply	24	static
+/home/honeykill/STM32_Project/f407_ele/App/Emm_V5_App.c:24:13:Emm_V5_App_ToUpper	16	static
+/home/honeykill/STM32_Project/f407_ele/App/Emm_V5_App.c:34:16:Emm_V5_App_ClampRpm	16	static
+/home/honeykill/STM32_Project/f407_ele/App/Emm_V5_App.c:45:17:Emm_V5_App_AbsRpm	16	static
+/home/honeykill/STM32_Project/f407_ele/App/Emm_V5_App.c:50:16:Emm_V5_App_GetDir	24	static
+/home/honeykill/STM32_Project/f407_ele/App/Emm_V5_App.c:61:13:Emm_V5_App_SendAxisVelocity	32	static
+/home/honeykill/STM32_Project/f407_ele/App/Emm_V5_App.c:69:13:Emm_V5_App_ProcessCmd	184	static
+/home/honeykill/STM32_Project/f407_ele/App/Emm_V5_App.c:120:6:Emm_V5_App_Init	8	static
+/home/honeykill/STM32_Project/f407_ele/App/Emm_V5_App.c:126:6:Emm_V5_App_SetEnable	16	static
+/home/honeykill/STM32_Project/f407_ele/App/Emm_V5_App.c:132:6:Emm_V5_App_SetVelocity	16	static
+/home/honeykill/STM32_Project/f407_ele/App/Emm_V5_App.c:142:6:Emm_V5_App_Stop	8	static
+/home/honeykill/STM32_Project/f407_ele/App/Emm_V5_App.c:148:6:Emm_V5_App_USB_CDC_Input	24	static
