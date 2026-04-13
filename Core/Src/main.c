@@ -26,6 +26,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "Emm_V5_App.h"
+#include "Emm_V5.h"
 #include "Uart1_Dma.h"
 
 /* USER CODE END Includes */
@@ -37,6 +38,11 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+#define MAKE_SPEED_MAX_RPM          (5000U)
+#define MAKE_POS_ACC                (EMM_GIMBAL_DEFAULT_ACC)
+#define MAKE_POS_PULSE_PER_REV      (3200U)
+#define MAKE_POS_IS_ABSOLUTE        (false)
+#define MAKE_POS_SYNC_FLAG          (false)
 
 /* USER CODE END PD */
 
@@ -54,11 +60,71 @@
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
+void make1(float speed, float weizhi);
+void make2(float speed, float weizhi);
 
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+static uint16_t make_speed_to_rpm(float speed)
+{
+  if (speed <= 0.0f) {
+    return 0U;
+  }
+
+  if (speed > (float)MAKE_SPEED_MAX_RPM) {
+    speed = (float)MAKE_SPEED_MAX_RPM;
+  }
+
+  return (uint16_t)(speed + 0.5f);
+}
+
+static uint32_t make_angle_to_pulse(float angle_deg)
+{
+  float abs_angle = (angle_deg >= 0.0f) ? angle_deg : -angle_deg;
+
+  return (uint32_t)((abs_angle * (float)MAKE_POS_PULSE_PER_REV / 360.0f) + 0.5f);
+}
+
+static uint8_t make_dir_from_angle(float angle_deg, bool invert)
+{
+  uint8_t dir = (angle_deg >= 0.0f) ? EMM_GIMBAL_DIR_CW : EMM_GIMBAL_DIR_CCW;
+
+  if (invert) {
+    dir = (dir == EMM_GIMBAL_DIR_CW) ? EMM_GIMBAL_DIR_CCW : EMM_GIMBAL_DIR_CW;
+  }
+
+  return dir;
+}
+
+static void make_axis(uint8_t addr, bool invert, float speed, float weizhi)
+{
+  uint16_t vel_rpm = make_speed_to_rpm(speed);
+  uint32_t clk = make_angle_to_pulse(weizhi);
+
+  if ((vel_rpm == 0U) || (clk == 0U)) {
+    return;
+  }
+
+  Emm_V5_Pos_Control(addr,
+                     make_dir_from_angle(weizhi, invert),
+                     vel_rpm,
+                     MAKE_POS_ACC,
+                     clk,
+                     MAKE_POS_IS_ABSOLUTE,
+                     MAKE_POS_SYNC_FLAG);
+}
+
+void make1(float speed, float weizhi)
+{
+  make_axis(EMM_GIMBAL_PAN_MOTOR_ADDR, (EMM_GIMBAL_PAN_DIR_INVERT != 0U), speed, weizhi);
+}
+
+void make2(float speed, float weizhi)
+{
+  make_axis(EMM_GIMBAL_TILT_MOTOR_ADDR, (EMM_GIMBAL_TILT_DIR_INVERT != 0U), speed, weizhi);
+}
 
 /* USER CODE END 0 */
 
@@ -94,7 +160,13 @@ int main(void)
   MX_DMA_Init();
   MX_USART1_UART_Init();
   MX_USB_DEVICE_Init();
+  MX_USART3_UART_Init();
   /* USER CODE BEGIN 2 */
+    //  Emm_V5_Vel_Control(2U, 0U, 100U, 100U, false);
+
+		// 	Emm_V5_Vel_Control(1U, 0U, 100U, 100U, false);
+
+
   UART1_DmaCommInit();
   Emm_V5_App_Init();
 
@@ -107,6 +179,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+    Emm_V5_App_Task();
   }
   /* USER CODE END 3 */
 }

@@ -10,7 +10,7 @@
 /home/honeykill/STM32_Project/f407_ele/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c:500:19:HAL_FLASH_OB_Launch	8	static
 /home/honeykill/STM32_Project/f407_ele/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c:537:10:HAL_FLASH_GetError	4	static
 /home/honeykill/STM32_Project/f407_ele/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c:551:19:FLASH_WaitForLastOperation	24	static
-/home/honeykill/STM32_Project/f407_ele/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c:611:13:FLASH_Program_DoubleWord	24	static
+/home/honeykill/STM32_Project/f407_ele/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c:611:13:FLASH_Program_DoubleWord	24	static,ignoring_inline_asm
 /home/honeykill/STM32_Project/f407_ele/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c:645:13:FLASH_Program_Word	16	static
 /home/honeykill/STM32_Project/f407_ele/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c:670:13:FLASH_Program_HalfWord	16	static
 /home/honeykill/STM32_Project/f407_ele/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c:695:13:FLASH_Program_Byte	16	static
