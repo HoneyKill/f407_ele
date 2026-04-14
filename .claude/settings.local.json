@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir \"C:\\\\Users\\\\70688\\\\Desktop\\\\diansai\")",
+      "Bash(cube-cmake --preset Debug)",
+      "Bash(echo \"EXIT_CODE=$?\")",
+      "Bash(echo \"EXIT=$?\")",
+      "Bash(cube-cmake --version)",
+      "Bash(export PATH=\"/c/Users/70688/AppData/Local/stm32cube/bundles/ninja/1.13.2+st.1/bin:$PATH\")",
+      "Bash(cube-cmake --build --preset Debug)",
+      "Bash(export PATH=\"/c/Users/70688/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/14.3.1+st.2/bin:/c/Users/70688/AppData/Local/stm32cube/bundles/ninja/1.13.2+st.1/bin:$PATH\")",
+      "Bash(rm -rf build/Debug)",
+      "Bash(arm-none-eabi-gcc --version)",
+      "Bash(ninja --version)",
+      "Read(//tmp/**)",
+      "Bash(export CUBE_BUNDLE_PATH=\"C:\\\\\\\\Users\\\\\\\\70688\\\\\\\\AppData\\\\\\\\Local\\\\\\\\stm32cube\\\\\\\\bundles\")",
+      "Bash(cmake --preset Debug)",
+      "Bash(cube-cmake -S . -B build/Debug -G Ninja -DCMAKE_BUILD_TYPE=Debug -DCMAKE_TOOLCHAIN_FILE=cmake/gcc-arm-none-eabi.cmake)",
+      "Bash(cmd.exe //C \"set PATH=C:\\\\Users\\\\70688\\\\AppData\\\\Local\\\\stm32cube\\\\bundles\\\\gnu-tools-for-stm32\\\\14.3.1+st.2\\\\bin;C:\\\\Users\\\\70688\\\\AppData\\\\Local\\\\stm32cube\\\\bundles\\\\ninja\\\\1.13.2+st.1\\\\bin;%PATH% && cube-cmake --preset Debug\")",
+      "Bash(export PATH=\"/c/Users/70688/AppData/Local/stm32cube/bundles/cmake/4.2.3+st.1/bin:/c/Users/70688/AppData/Local/stm32cube/bundles/gnu-tools-for-stm32/14.3.1+st.2/bin:/c/Users/70688/AppData/Local/stm32cube/bundles/ninja/1.13.2+st.1/bin:$PATH\")",
+      "Bash(cmake --version)",
+      "Bash(cmake -S . -B build/Debug -G Ninja -DCMAKE_BUILD_TYPE=Debug -DCMAKE_TOOLCHAIN_FILE=cmake/gcc-arm-none-eabi.cmake)",
+      "Bash(cmd.exe //C \"set PATH=C:\\\\Users\\\\70688\\\\AppData\\\\Local\\\\stm32cube\\\\bundles\\\\cmake\\\\4.2.3+st.1\\\\bin;C:\\\\Users\\\\70688\\\\AppData\\\\Local\\\\stm32cube\\\\bundles\\\\gnu-tools-for-stm32\\\\14.3.1+st.2\\\\bin;C:\\\\Users\\\\70688\\\\AppData\\\\Local\\\\stm32cube\\\\bundles\\\\ninja\\\\1.13.2+st.1\\\\bin;%PATH% && cd /d C:\\\\Users\\\\70688\\\\Desktop\\\\diansai\\\\第一次测试\\\\f407_ele && rmdir /s /q build\\\\Debug 2>nul & cmake --preset Debug 2>&1\")",
+      "Bash(cmd.exe //C \"chcp 65001 >nul && set PATH=C:\\\\Users\\\\70688\\\\AppData\\\\Local\\\\stm32cube\\\\bundles\\\\cmake\\\\4.2.3+st.1\\\\bin;C:\\\\Users\\\\70688\\\\AppData\\\\Local\\\\stm32cube\\\\bundles\\\\gnu-tools-for-stm32\\\\14.3.1+st.2\\\\bin;C:\\\\Users\\\\70688\\\\AppData\\\\Local\\\\stm32cube\\\\bundles\\\\ninja\\\\1.13.2+st.1\\\\bin;%PATH% && cd /d \\\\\"C:\\\\Users\\\\70688\\\\Desktop\\\\diansai\\\\第一次测试\\\\f407_ele\\\\\" && if exist build\\\\Debug rmdir /s /q build\\\\Debug && cmake --preset Debug\")",
+      "Bash(powershell.exe -Command ':*)"
+    ]
+  }
+}

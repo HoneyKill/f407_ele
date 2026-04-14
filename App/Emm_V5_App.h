@@ -56,6 +56,36 @@ extern "C" {
 #define EMM_GIMBAL_VOFA_TIMEOUT_MS           (200U)
 #define EMM_GIMBAL_VOFA_CTRL_PERIOD_MS       (20U)
 
+/* ---- State machine phases ---- */
+#define EMM_GIMBAL_PHASE_ZEROING             (0U)
+#define EMM_GIMBAL_PHASE_CALIB_WAIT          (1U)
+#define EMM_GIMBAL_PHASE_CALIB_PAN           (2U)
+#define EMM_GIMBAL_PHASE_CALIB_TILT          (3U)
+#define EMM_GIMBAL_PHASE_NORMAL              (4U)
+
+/* ---- Zeroing phase config ---- */
+#define EMM_GIMBAL_ZEROING_DURATION_MS       (10000U)  /* 10 seconds for manual zeroing */
+
+/* ---- Calibration config ---- */
+#define EMM_GIMBAL_CALIB_ANGLE_DEG           (2.0f)    /* degrees to move for calibration */
+#define EMM_GIMBAL_CALIB_SPEED_RPM           (50U)     /* slow speed for calibration move */
+#define EMM_GIMBAL_CALIB_SETTLE_MS           (1500U)   /* wait for motor to settle & Maix to respond */
+#define EMM_GIMBAL_CALIB_DEFAULT_PPD         (20.0f)   /* lower -> more sensitive position response */
+
+/* ---- Position control config ---- */
+#define EMM_GIMBAL_POS_MAX_ANGLE_DEG         (30.0f)   /* ±30 degrees from origin */
+#define EMM_GIMBAL_POS_PULSE_PER_REV         (3200U)
+#define EMM_GIMBAL_POS_CTRL_PERIOD_MS        (30U)
+#define EMM_GIMBAL_POS_SPEED_RPM             (180U)    /* position move speed */
+#define EMM_GIMBAL_POS_DEADBAND_PX           (6.0f)    /* increase deadband to suppress jitter */
+#define EMM_GIMBAL_POS_PAN_GAIN              (1.6f)    /* x-axis gain */
+#define EMM_GIMBAL_POS_TILT_GAIN             (0.8f)    /* y-axis gain */
+
+/* ---- New VOFA commands for calibration handshake ---- */
+#define EMM_GIMBAL_VOFA_CMD_CALIB_REQ        (0xE0U)   /* STM32->Maix: request baseline/measure */
+#define EMM_GIMBAL_VOFA_CMD_CALIB_PX_X       (0xE1U)   /* Maix->STM32: calibration pixel delta X */
+#define EMM_GIMBAL_VOFA_CMD_CALIB_PX_Y       (0xE2U)   /* Maix->STM32: calibration pixel delta Y */
+
 void Emm_V5_App_Init(void);
 void Emm_V5_App_Task(void);
 void Emm_V5_App_SetEnable(bool enable);

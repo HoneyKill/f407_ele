@@ -1,9 +1,0 @@
-/home/honeykill/STM32_Project/f407_ele/Core/Src/main.c:70:17:make_speed_to_rpm	16	static
-/home/honeykill/STM32_Project/f407_ele/Core/Src/main.c:83:17:make_angle_to_pulse	24	static
-/home/honeykill/STM32_Project/f407_ele/Core/Src/main.c:90:16:make_dir_from_angle	24	static
-/home/honeykill/STM32_Project/f407_ele/Core/Src/main.c:101:13:make_axis	48	static
-/home/honeykill/STM32_Project/f407_ele/Core/Src/main.c:119:6:make1	16	static
-/home/honeykill/STM32_Project/f407_ele/Core/Src/main.c:124:6:make2	16	static
-/home/honeykill/STM32_Project/f407_ele/Core/Src/main.c:135:5:main	8	static
-/home/honeykill/STM32_Project/f407_ele/Core/Src/main.c:191:6:SystemClock_Config	88	static
-/home/honeykill/STM32_Project/f407_ele/Core/Src/main.c:240:6:Error_Handler	4	static,ignoring_inline_asm

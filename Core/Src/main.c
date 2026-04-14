@@ -168,7 +168,22 @@ int main(void)
 
 
   UART1_DmaCommInit();
+
+  /* 等待 EMM 驱动器上电就绪（关键！不等的话后面指令全部丢失） */
+  HAL_Delay(500);
+
   Emm_V5_App_Init();
+
+  /* ---- 开机测试动作：直接用底层函数，和能跑的程序一样 ---- */
+  HAL_Delay(200);
+  Emm_V5_Pos_Control(0x01, 0, 200, 80, 44, false, false);  /* 1号 CW 5度 */
+  HAL_Delay(5);
+  Emm_V5_Pos_Control(0x02, 0, 200, 80, 44, false, false);  /* 2号 CW 5度 */
+  HAL_Delay(1000);
+  Emm_V5_Pos_Control(0x01, 1, 200, 80, 44, false, false);  /* 1号 CCW 5度 */
+  HAL_Delay(5);
+  Emm_V5_Pos_Control(0x02, 1, 200, 80, 44, false, false);  /* 2号 CCW 5度 */
+  HAL_Delay(1000);
 
   /* USER CODE END 2 */
 

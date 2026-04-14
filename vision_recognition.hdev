@@ -1,0 +1,72 @@
+* OpenCV-equivalent vision part for HDevelop
+* Function: detect largest contour and bright/red dot from default camera
+
+dev_update_off ()
+dev_close_window ()
+dev_open_window (0, 0, 960, 720, 'black', WindowHandle)
+set_display_font (WindowHandle, 16, 'mono', 'true', 'false')
+
+* Open built-in/default camera (DirectShow on Windows)
+info_framegrabber ('DirectShow', 'device', Information, DeviceList)
+if (|DeviceList| < 1)
+    dev_disp_text ('No camera found by DirectShow', 'window', 'top', 'left', 'red', [], [])
+    stop ()
+endif
+tuple_select (DeviceList, 0, CameraDevice)
+
+open_framegrabber ('DirectShow', 1, 1, 0, 0, 0, 0, 'progressive', 8, 'rgb', -1, 'false', 'default', CameraDevice, 0, -1, AcqHandle)
+grab_image_start (AcqHandle, -1)
+
+* Main loop (stop from HDevelop "Stop" button)
+while (true)
+    grab_image_async (Image, AcqHandle, -1)
+    dev_display (Image)
+
+    * ---- contour detection ----
+    rgb1_to_gray (Image, Gray)
+    gauss_image (Gray, Blur, 7)
+    dilation_circle (Blur, Dilate, 1.5)
+    erosion_circle (Dilate, Erode, 1.5)
+    edges_image (Erode, EdgeAmp, 'canny', 1, 20, 40)
+    threshold (EdgeAmp, EdgeRegion, 60, 255)
+    connection (EdgeRegion, Connected)
+    select_shape (Connected, BigRegions, 'area', 'and', 1000, 99999999)
+
+    count_obj (BigRegions, BigCount)
+    if (BigCount > 0)
+        area_center (BigRegions, Areas, Rows, Cols)
+        tuple_sort_index (Areas, SortedIdx)
+        tuple_select (SortedIdx, |SortedIdx| - 1, MaxIdx)
+        select_obj (BigRegions, MaxRegion, MaxIdx + 1)
+
+        boundary (MaxRegion, RegionBorder, 'outer')
+        gen_contour_region_xld (MaxRegion, ContourXLD, 'border')
+        dev_set_color ('green')
+        dev_display (ContourXLD)
+    endif
+
+    * ---- bright/red dot detection ----
+    decompose3 (Image, R, G, B)
+    sub_image (R, G, RGDiff, 1, 0)
+    sub_image (RGDiff, B, RedScore, 1, 0)
+    threshold (RedScore, RedMask, 80, 255)
+    opening_circle (RedMask, RedOpen, 2.0)
+    connection (RedOpen, RedConn)
+    select_shape (RedConn, RedCandidates, 'area', 'and', 3, 500)
+
+    count_obj (RedCandidates, RedCount)
+    if (RedCount > 0)
+        area_center (RedCandidates, DotAreas, DotRows, DotCols)
+        tuple_sort_index (DotAreas, DotIdx)
+        tuple_select (DotIdx, |DotIdx| - 1, DotMaxIdx)
+        tuple_select (DotRows, DotMaxIdx, DotRow)
+        tuple_select (DotCols, DotMaxIdx, DotCol)
+        gen_circle (DotCircle, DotRow, DotCol, 10)
+        dev_set_color ('red')
+        dev_display (DotCircle)
+    endif
+
+    dev_disp_text ('HDevelop vision running (Stop to exit)', 'window', 10, 10, 'yellow', [], [])
+endwhile
+
+close_framegrabber (AcqHandle)

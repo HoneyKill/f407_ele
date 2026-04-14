@@ -1,8 +1,0 @@
-{
-	"InstallScripts" : 
-	[
-		"/home/honeykill/STM32_Project/f407_ele/build/Debug/cmake_install.cmake",
-		"/home/honeykill/STM32_Project/f407_ele/build/Debug/cmake/stm32cubemx/cmake_install.cmake"
-	],
-	"Parallel" : false
-}
